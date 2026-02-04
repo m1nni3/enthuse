@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Villeroy Financial 2026</title>
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap' rel='stylesheet'>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; color: #1E293B; margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        h1 { font-size: 2.6rem; margin-bottom: 10px; text-transform: uppercase; }
+        .gradient-bar { height: 6px; width: 120px; background: linear-gradient(90deg, #00A6E0, #7ED957, #F9C74F, #F9844A, #9B5DE5); margin-bottom: 20px; border-radius: 3px; }
+        .description { font-size: 1rem; color: #64748B; margin-bottom: 30px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #CBD5E1; padding: 8px 12px; text-align: left; }
+        th { background-color: #F1F5F9; font-weight: 700; }
+        .pos { color: #16A34A; font-weight: 700; }
+        .neg { color: #DC2626; font-weight: 700; }
+        .nav-links { margin-top: 20px; }
+        .nav-links a { color: #00A6E0; margin-right: 15px; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <h1>Villeroy 2026 Financial Summary</h1>
+    <div class='gradient-bar'></div>
+    <p class='description'>This page shows the annual net income and raw financial table for Villeroy in 2026. Use the links below to switch between years or return to the summary page.</p>
+    <table>
+        <thead><tr><th>Property</th><th>Year</th><th>Net Income</th></tr></thead>
+        <tbody>
+            <tr><td>Villeroy</td><td>2026</td><td class='pos'>0</td></tr>
+        </tbody>
+    </table>
+    <div class='nav-links'>
+        <a href='villeroy_finance_2025.html'>Switch to 2025 finance</a>
+        <a href='../property_pages/villeroy_2025.html'>View 2025 portfolio info</a>
+        <a href='../finance_summary.html'>Back to Summary</a>
+    </div>
+    <div id='data-container'></div>
+</div>
+<script>
+(function() {
+    const sheetId = '1trxjyRp68k4Kh7_UEdk34KET2yzKbHyUaJxOaiv83Sk';
+    const gid = '3';
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+    fetch(url)
+        .then(resp => resp.text())
+        .then(text => {
+            const pre = document.createElement('pre');
+            pre.style.whiteSpace = 'pre-wrap';
+            pre.textContent = text.slice(0, 2000) + '
+...';
+            document.getElementById('data-container').appendChild(pre);
+        })
+        .catch(err => {
+            const p = document.createElement('p');
+            p.style.color = '#C62828';
+            p.textContent = 'Failed to fetch data: ' + err;
+            document.getElementById('data-container').appendChild(p);
+        });
+})();
+</script>
+</body>
+</html>

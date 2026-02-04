@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Finance Summary</title>
+    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap' rel='stylesheet'>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFFFFF; color: #1E293B; margin: 0; padding: 0; scroll-behavior: smooth; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        h1 { font-size: 2.8rem; margin-bottom: 10px; }
+        .gradient-bar { height: 6px; width: 160px; background: linear-gradient(90deg, #00A6E0, #7ED957, #F9C74F, #F9844A, #9B5DE5); margin-bottom: 25px; border-radius: 3px; }
+        .description { font-size: 1rem; color: #64748B; margin-bottom: 30px; }
+        #nav-bar { position: sticky; top: 0; background-color: #FFFFFF; padding: 10px 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        #nav-bar a { margin-right: 20px; color: #00A6E0; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        #nav-bar a:hover { text-decoration: underline; }
+        section { margin-bottom: 60px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        th, td { padding: 12px 10px; text-align: right; border: 1px solid #CBD5E1; font-size: 0.9rem; }
+        th:first-child, td:first-child { text-align: left; }
+        th { background-color: #F8FAFC; font-weight: 700; color: #1E293B; }
+        .pos-value { color: #2E8540; font-weight: 700; }
+        .neg-value { color: #C62828; font-weight: 700; }
+        .property-link { color: #00A6E0; text-decoration: none; font-weight: 600; }
+        .property-link:hover { text-decoration: underline; }
+        #backTopBtn { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; background: #00A6E0; color: #FFFFFF; border: none; border-radius: 8px; cursor: pointer; font-size: 20px; display: none; align-items: center; justify-content: center; z-index: 200; }
+        #backTopBtn:hover { background: #0080B3; }
+    </style>
+</head>
+<body>
+<div class='container'>
+    <h1>Finance Summary</h1>
+    <div class='gradient-bar'></div>
+    <p class='description'>This summary lists the annual net income totals (from the totals column) for each
+    property in 2025 and 2026.  Click on a property name to view its detailed
+    financial page for that year.</p>
+    <div id='nav-bar'>
+        <a href='#sec2025'>2025 Totals</a>
+        <a href='#sec2026'>2026 Totals</a>
+        <a href='#financeFolder'>Finance Folder</a>
+    </div>
+    <section id='sec2025'>
+        <h2>2025 Totals</h2>
+        <table>
+            <tr><th>Property</th><th>Annual Net Income</th></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/malindi_finance_2025.html'>MALINDI</a></td><td class='neg-value'>-2154</td></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/indaba_finance_2025.html'>INDABA</a></td><td class='pos-value'>4936</td></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/villeroy_finance_2025.html'>VILLEROY</a></td><td class='pos-value'>7297</td></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/oakdale_finance_2025.html'>OAKDALE</a></td><td class='neg-value'>-44319</td></tr>
+                <tr><td><strong>Overall Total</strong></td><td class='neg-value'><strong>-34240</strong></td></tr>
+
+    </table>
+</section>
+<section id='sec2026'>
+    <h2>2026 Totals</h2>
+    <table>
+        <tr><th>Property</th><th>Annual Net Income</th></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/malindi_finance_2026.html'>MALINDI</a></td><td class='pos-value'>0</td></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/indaba_finance_2026.html'>INDABA</a></td><td class='pos-value'>2761</td></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/villeroy_finance_2026.html'>VILLEROY</a></td><td class='pos-value'>0</td></tr>
+                <tr><td><a class='property-link' href='finance_pages_final/oakdale_finance_2026.html'>OAKDALE</a></td><td class='pos-value'>0</td></tr>
+                <tr><td><strong>Overall Total</strong></td><td class='pos-value'><strong>2761</strong></td></tr>
+
+        </table>
+    </section>
+    <section id='financeFolder'>
+        <h2>Finance Drive Folder</h2>
+        <p>The finance folder explorer will be embedded here.</p>
+    </section>
+</div>
+<button id='backTopBtn' onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
+<script>
+    // Show back-to-top button when scrolling
+    window.onscroll = function() {
+        const btn = document.getElementById('backTopBtn');
+        if (document.documentElement.scrollTop > 400) {
+            btn.style.display = 'flex';
+        } else {
+            btn.style.display = 'none';
+        }
+    };
+</script>
+</body>
+</html>

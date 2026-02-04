@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Indaba 2026 | Enthuse Trust</title>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap' rel='stylesheet'>
+  <style>
+    :root {
+      --brand-blue: #00A6E0;
+      --brand-green: #7ED957;
+      --brand-yellow: #F9C74F;
+      --brand-orange: #F9844A;
+      --brand-purple: #9B5DE5;
+      --text-dark: #1E293B;
+      --text-muted: #64748B;
+      --border-default: #CBD5E1;
+      --full-gradient: linear-gradient(90deg, var(--brand-blue), var(--brand-green), var(--brand-yellow), var(--brand-orange), var(--brand-purple));
+    }
+    body { font-family: 'Inter', sans-serif; margin: 0; color: var(--text-dark); background: #fff; }
+    header { padding: 40px 20px; background: #f8fafc; border-bottom: 2px solid var(--border-default); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+    header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
+    header .desc { max-width: 600px; color: var(--text-muted); }
+    .gradient-bar { height: 6px; width: 100px; background: var(--full-gradient); margin-top: 10px; border-radius: 3px; }
+    nav { position: sticky; top: 0; background: #ffffff; border-bottom: 2px solid var(--border-default); z-index: 999; padding: 10px 20px; display: flex; gap: 15px; }
+    nav a { color: var(--text-dark); font-weight: 600; text-decoration: none; transition: color 0.2s; }
+    nav a:hover { color: var(--brand-blue); }
+    section { padding: 40px 20px; border-bottom: 1px solid var(--border-default); }
+    section h2 { margin-top: 0; margin-bottom: 20px; font-size: 1.5rem; color: var(--brand-blue); }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+    .info-box { background: #ffffff; border: 2px solid var(--border-default); border-radius: 10px; padding: 15px; }
+    .info-box .label { display: block; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+    .info-box .val { font-size: 1rem; font-weight: 600; }
+    .mini-table { border-collapse: collapse; margin-bottom: 20px; border: 2px solid var(--border-default); border-radius: 10px; width: 100%; overflow: hidden; }
+    .mini-table td { padding: 8px 12px; border-bottom: 1px solid var(--border-default); }
+    .mini-table tr:last-child td { border-bottom: none; }
+    .mini-table .label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .mini-table .val { font-size: 1rem; font-weight: 600; color: var(--text-dark); }
+    .mini-tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    /* Back to top button */
+    #backBtn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--brand-blue); color: #fff; border: none; border-radius: 8px; font-size: 20px; display: none; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+  </style>
+  <script>
+    window.addEventListener('scroll', function() {
+      const btn = document.getElementById('backBtn');
+      if (window.scrollY > 500) { btn.style.display = 'flex'; } else { btn.style.display = 'none'; }
+    });
+    function backToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  </script>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Indaba 2026</h1>
+      <div class='gradient-bar'></div>
+    </div>
+    <div class='desc'>
+      Detailed information about the property, municipal services, letting agents, body corporate, financing and insurance for the Enthuse Trust portfolio.
+    </div>
+  </header>
+  <nav>
+    <a href='#section-property-details'>Property Details</a><a href='#section-municipal'>Municipal & Services</a><a href='#section-letting'>Letting & Contacts</a><a href='#section-bodycorp'>Body Corporate & Levies</a><a href='#section-finance'>Finance & Insurance</a><a href='#section-emergency'>Emergency Contacts</a><a href='#section-netincome'>Net Income</a>
+  </nav>
+  
+      <section id='section-property-details'>
+        <h2>Property Details</h2>
+        <div class='info-grid'><div class='info-box'><span class='label'>Full Street Address</span><span class='val'>321 Frederick St, Pretoria West, Pretoria, 0183</span></div><div class='info-box'><span class='label'>Unit Number</span><span class='val'>5</span></div><div class='info-box'><span class='label'>Door Number</span><span class='val'>105</span></div><div class='info-box'><span class='label'>ERF Number</span><span class='val'>1591</span></div><div class='info-box'><span class='label'>Scheme Name</span><span class='val'>SS INDABA</span></div><div class='info-box'><span class='label'>Scheme Number</span><span class='val'>SS310/1995</span></div><div class='info-box'><span class='label'>Size (m²)</span><span class='val'>77</span></div><div class='info-box'><span class='label'>Suburb</span><span class='val'>Pretoria West</span></div><div class='info-box'><span class='label'>Township</span><span class='val'>Pretoria</span></div><div class='info-box'><span class='label'>LPI Code</span><span class='val'>T0JR01990000159100001</span></div><div class='info-box'><span class='label'>Purchase Date</span><span class='val'>2005-06-28</span></div><div class='info-box'><span class='label'>Purchase Price</span><span class='val'>R 170,000</span></div><div class='info-box'><span class='label'>Current Market Value</span><span class='val'>R 440,000</span></div><div class='info-box'><span class='label'>Estimated Market Value</span><span class='val'>R 440,000</span></div><div class='info-box'><span class='label'>Title Deed Reference</span><span class='val'>ST152255/2005</span></div><div class='info-box'><span class='label'>Owner Name</span><span class='val'>ENTHUSE TRUST</span></div></div>
+      </section>
+    
+      <section id='section-municipal'>
+        <h2>Municipal & Services Info</h2>
+        <div class='mini-tables'>
+            <table class="mini-table">
+              <tbody>
+            <tr><td class='label'>Municipality</td><td class='val'>City of Tshwane</td></tr><tr><td class='label'>Account Number</td><td class='val'>—</td></tr></tbody></table>
+            <table class="mini-table">
+              <tbody>
+            <tr><td class='label'>Municipal Valuation</td><td class='val'>R 400,000</td></tr><tr><td class='label'>Valuation Year</td><td class='val'>2025</td></tr></tbody></table>
+            <table class="mini-table">
+              <tbody>
+            <tr><td class='label'>Customer Service Email</td><td class='val'>customercare@tshwane.gov.za</td></tr><tr><td class='label'>Contact Number</td><td class='val'>(012) 358 9999</td></tr></tbody></table></div>
+      </section>
+    
+      <section id='section-letting'>
+        <h2>Letting Agent & Contacts</h2>
+        <div class='info-grid'><div class='info-box'><span class='label'>Managing Agent</span><span class='val'>Huurkor Admin</span></div><div class='info-box'><span class='label'>Portfolio Manager</span><span class='val'>Vincent Moela</span></div><div class='info-box'><span class='label'>Agent Email</span><span class='val'>indaba@hkadmin.co.za</span></div><div class='info-box'><span class='label'>Agent Phone</span><span class='val'>0642-00105-01</span></div><div class='info-box'><span class='label'>Management Fee</span><span class='val'>10% of rental income</span></div></div>
+      </section>
+    
+      <section id='section-bodycorp'>
+        <h2>Body Corporate & Levies</h2>
+        <div class='info-grid'><div class='info-box'><span class='label'>Body Corporate Name</span><span class='val'>Indaba (VM) Body Corporate</span></div><div class='info-box'><span class='label'>Registration Number</span><span class='val'>310/1995</span></div><div class='info-box'><span class='label'>Bank</span><span class='val'>ABSA</span></div><div class='info-box'><span class='label'>Account Name</span><span class='val'>HUURKOR ADMIN (PTY) LTD</span></div><div class='info-box'><span class='label'>Branch Code</span><span class='val'>632005</span></div><div class='info-box'><span class='label'>Levy Payment Reference</span><span class='val'>0642-00105-01</span></div><div class='info-box'><span class='label'>BC Contact Name</span><span class='val'>Huurkor Admin (Indaba)</span></div><div class='info-box'><span class='label'>BC Contact Phone</span><span class='val'>012 88 44 840/1/2</span></div><div class='info-box'><span class='label'>BC Contact Email</span><span class='val'>indaba@hkadmin.co.za</span></div><div class='info-box'><span class='label'>BC Contact Role</span><span class='val'>Managing Agent</span></div></div>
+      </section>
+    
+      <section id='section-finance'>
+        <h2>Finance & Insurance</h2>
+        <div class='info-grid'><div class='info-box'><span class='label'>Bond Bank</span><span class='val'>ABSA</span></div><div class='info-box'><span class='label'>Bond Account Number</span><span class='val'>8062450756</span></div><div class='info-box'><span class='label'>Original Bond Amount</span><span class='val'>R 170,000</span></div><div class='info-box'><span class='label'>Bond Endorsement</span><span class='val'>R 225,000</span></div><div class='info-box'><span class='label'>Endorsement Date</span><span class='val'>2005-11-23</span></div><div class='info-box'><span class='label'>Monthly Payment</span><span class='val'>R 2,178.38</span></div><div class='info-box'><span class='label'>Expected Payoff Date</span><span class='val'>Paid up?</span></div></div>
+      </section>
+    
+      <section id='section-emergency'>
+        <h2>Emergency Contacts</h2>
+        <div class='info-grid'><div class='info-box'><span class='label'>Emergency Contact Name</span><span class='val'>Property Emergency</span></div><div class='info-box'><span class='label'>Emergency Contact Role</span><span class='val'>After Hours</span></div></div>
+      </section>
+    
+      <section id='section-netincome'>
+        <h2>Net Income</h2>
+        <p><strong>Annual Net Income (2026):</strong> N/A</p>
+        <p><strong>Annual Net Income (2025):</strong> 4936</p>
+        <p>View this property’s details for 2025: <a href='indaba_2025.html'>Indaba 2025 Details</a></p>
+      </section>
+    
+  <button id='backBtn' onclick='backToTop()'>↑</button>
+</body>
+</html>
+    
