@@ -1,18 +1,18 @@
+fix:
   - name: Setup Python
     uses: actions/setup-python@v4
     with:
       python-version: '3.11'
-
+      
   - name: Install dependencies
     run: |
       python -m pip install --upgrade pip
       pip install requests
-
+      
   - name: Create artifacts dir
     run: mkdir -p artifacts/index
-
+    
   - name: Generate simple JSON index
-    # This step creates a minimal index: path, sha1 and first 10k chars of each text file.
     run: |
       python - <<'PY'
       import os, json, hashlib
@@ -20,37 +20,43 @@
       ignore_dirs = {'.git','node_modules','venv','.venv'}
       entries=[]
       for dirpath, dirs, files in os.walk(root):
-          # prune ignored and hidden dirs
-          dirs[:] = [d for d in dirs if d not in ignore_dirs and not d.startswith('.')]
-          for f in files:
-              if f.startswith('.'):
-                  continue
-              path = os.path.join(dirpath,f)
-              # skip workflow artifact we may generate
-              if path.startswith('./artifacts'):
-                  continue
-              try:
-                  with open(path,'r',encoding='utf-8') as fh:
-                      content = fh.read()
-              except Exception:
-                  # skip binary/non-readable files
-                  continue
-              entries.append({'path': path.replace('./',''), 'sha1': hashlib.sha1(content.encode('utf-8')).hexdigest(), 'content': content[:10000]})
-      out = {'repo': os.getenv('GITHUB_REPOSITORY'),'ref': os.getenv('GITHUB_REF'),'indexed_files':len(entries),'entries':entries}
+        dirs[:] = [d for d in dirs if d not in ignore_dirs and not d.startswith('.')]
+        for f in files:
+          if f.startswith('.'):
+            continue
+          path = os.path.join(dirpath,f)
+          if path.startswith('./artifacts'):
+            continue
+          try:
+            with open(path,'r',encoding='utf-8') as fh:
+              content = fh.read()
+          except Exception:
+            continue
+          entries.append({
+            'path': path.replace('./',''),
+            'sha1': hashlib.sha1(content.encode('utf-8')).hexdigest(),
+            'content': content[:10000]
+          })
+      out = {
+        'repo': os.getenv('GITHUB_REPOSITORY'),
+        'ref': os.getenv('GITHUB_REF'),
+        'indexed_files': len(entries),
+        'entries': entries
+      }
       os.makedirs('artifacts/index', exist_ok=True)
       with open('artifacts/index/index.json','w',encoding='utf-8') as w:
-          json.dump(out,w)
+        json.dump(out,w)
       print('Wrote artifacts/index/index.json')
       PY
-
+      
   - name: Upload index artifact
     uses: actions/upload-artifact@v4
     with:
       name: repo-index
       path: artifacts/index/index.json
-
+      
   - name: Push index to external endpoint (optional)
-    if: secrets.INDEX_ENDPOINT != ''
+    if: ${{ secrets.INDEX_ENDPOINT != '' }}
     env:
       INDEX_ENDPOINT: ${{ secrets.INDEX_ENDPOINT }}
       INDEX_API_KEY: ${{ secrets.INDEX_API_KEY }}
@@ -64,9 +70,9 @@
         -F "repo=${GITHUB_REPOSITORY}" \
         -F "ref=${GITHUB_REF}" \
         || echo "POST failed (non-zero exit)"
-
+        
   - name: Push to Meilisearch (optional)
-    if: secrets.MEILI_HOST != ''
+    if: ${{ secrets.MEILI_HOST != '' }}
     env:
       MEILI_HOST: ${{ secrets.MEILI_HOST }}
       MEILI_KEY: ${{ secrets.MEILI_KEY }}
@@ -77,24 +83,39 @@
       key = os.getenv('MEILI_KEY')
       idx_file = 'artifacts/index/index.json'
       with open(idx_file,'r',encoding='utf-8') as f:
-          data = json.load(f)
-      documents = [{'id':e['sha1'],'path':e['path'],'content':e['content']} for e in data.get('entries',[])]
+        data = json.load(f)
+      documents = [
+        {
+          'id': e['sha1'],
+          'path': e['path'],
+          'content': e['content']
+        } for e in data.get('entries',[])
+      ]
       headers = {'X-Meili-API-Key': key} if key else {}
-      # Create index (uid: enthuse_docs) then add documents
       try:
-          create_resp = requests.post(f"{host}/indexes", json={"uid":"enthuse_docs"}, headers=headers, timeout=30)
-          print('create', create_resp.status_code, create_resp.text[:500])
+        create_resp = requests.post(
+          f"{host}/indexes",
+          json={"uid":"enthuse_docs"},
+          headers=headers,
+          timeout=30
+        )
+        print('create', create_resp.status_code, create_resp.text[:500])
       except Exception as ex:
-          print('create-exception', ex)
+        print('create-exception', ex)
       try:
-          push_resp = requests.post(f"{host}/indexes/enthuse_docs/documents", json=documents, headers=headers, timeout=60)
-          print('push', push_resp.status_code, (push_resp.text or '')[:500])
+        push_resp = requests.post(
+          f"{host}/indexes/enthuse_docs/documents",
+          json=documents,
+          headers=headers,
+          timeout=60
+        )
+        print('push', push_resp.status_code, (push_resp.text or '')[:500])
       except Exception as ex:
-          print('push-exception', ex)
+        print('push-exception', ex)
       PY
-
+      
   - name: Print summary
     run: |
       echo "Index generated and uploaded as artifact 'repo-index'."
-      echo "To enable automatic push to an external index: add repository secret INDEX_ENDPOINT (URL) and optional INDEX_API_KEY."
+      echo "To enable automatic push: add repository secret INDEX_ENDPOINT (URL) and optional INDEX_API_KEY."
       echo "To enable Meilisearch push: add MEILI_HOST and MEILI_KEY secrets."
